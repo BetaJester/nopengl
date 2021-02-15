@@ -1,0 +1,11 @@
+// Copyright (C) 2021 Glenn Duncan <betajester@betajester.com>
+// See README.md, LICENSE, or go to https://github.com/BetaJester/nopengl
+// for details.
+
+#cmakedefine01 NOPENGL_USE_INCLUDED_GLAD()
+#cmakedefine01 NOPENGL_ENABLE_LOGGING()
+#cmakedefine01 NOPENGL_USE_FETCHED_FMT()
+
+#if NOPENGL_USE_INCLUDED_GLAD()
+#include <glad/glad.h>
+#endif
