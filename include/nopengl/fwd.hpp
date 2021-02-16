@@ -60,6 +60,6 @@ namespace nopengl {
 
     // Program.hpp
     [[nodiscard]]
-    inline std::uint32_t current_program() noexcept;
+    inline Program current_program_weak_copy() noexcept;
 
 } // namespace nopengl.

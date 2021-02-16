@@ -16,6 +16,8 @@ namespace nopengl {
 
         GLuint inner{};
 
+        Program(const GLuint value) : inner{ value } {}
+
     public:
         Program(std::nullptr_t) noexcept {}
         
@@ -37,31 +39,39 @@ namespace nopengl {
         Program& operator=(const Program&) = delete;
 
         [[nodiscard]] GLuint operator*() const noexcept {
-            return inner;
+            return inner & 0x0000FFFF;
         }
 
         void emplace() noexcept {
             reset();
             inner = glCreateProgram(); GLC();
+            inner = (inner << 16) | inner;
         }
 
         void reset() noexcept {
             if (inner) {
-                glDeleteProgram(inner); GLC();
+                glDeleteProgram(inner >> 16); GLC();
             }
             inner = 0;
         }
 
+        [[nodiscard]]
+        Program weak_copy() const noexcept {
+            return Program(inner & 0x0000FFFF);
+        }
+
+        friend inline Program current_program_weak_copy() noexcept;
+
     };
 
     [[nodiscard]]
-    inline std::uint32_t current_program() noexcept {
+    inline Program current_program_weak_copy() noexcept {
         GLint program{};
         glGetIntegerv(GL_CURRENT_PROGRAM, &program); GLC();
         if (program == -1) {
             NOPENGL_LOGGER("No current program for vao_attribute_pointer");
         }
-        return program;
+        return Program(program);
     }
 
 } // namespace nopengl.
