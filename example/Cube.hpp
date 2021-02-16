@@ -42,9 +42,9 @@ class [[nodiscard]] Cube final {
 
 public:
 
-    Cube(const SimpleProgram::ShaderLocations &shader_locations) noexcept {
+    Cube(const nopengl::Program &program) noexcept {
 
-        u_model_matrix = shader_locations.u_model_matrix;
+        u_model_matrix = nopengl::uniform_location(program, "u_model_matrix");
 
         vbo.emplace();
         nopengl::bind(GL_ARRAY_BUFFER, vbo);
@@ -53,10 +53,8 @@ public:
 
         vao.emplace();
         nopengl::bind(vao);
-        glEnableVertexAttribArray(shader_locations.a_position); GLC();
-        glEnableVertexAttribArray(shader_locations.a_color); GLC();
-        glVertexAttribPointer(shader_locations.a_position, 3, GL_FLOAT, false, sizeof(Vertex), (void *)offsetof(Vertex, position)); GLC();
-        glVertexAttribPointer(shader_locations.a_color, 3, GL_FLOAT, false, sizeof(Vertex), (void *)offsetof(Vertex, color)); GLC();
+        nopengl::vao_attribute_pointer(program, "a_position", sizeof(Vertex), offsetof(Vertex, position));
+        nopengl::vao_attribute_pointer(program, "a_color", sizeof(Vertex), offsetof(Vertex, color));
 
         vio.emplace();
         nopengl::bind(GL_ELEMENT_ARRAY_BUFFER, vio);

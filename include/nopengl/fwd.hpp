@@ -62,4 +62,10 @@ namespace nopengl {
     [[nodiscard]]
     inline Program current_program_weak_copy() noexcept;
 
+    // VAO.hpp
+    void enable_vao_attribute_array(std::uint32_t index) noexcept;
+    inline void vao_attribute_pointer(const std::uint32_t index, const std::uint32_t size, const GLenum type, const bool normalized, const std::size_t stride, const std::size_t offset) noexcept;
+    inline void vao_attribute_pointer(const Program &program, const std::string_view name, const std::size_t stride, const std::size_t offset) noexcept;
+    inline void vao_attribute_pointer(const std::string_view name, const std::size_t stride, const std::size_t offset) noexcept;
+
 } // namespace nopengl.
