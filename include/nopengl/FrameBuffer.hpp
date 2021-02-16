@@ -54,4 +54,10 @@ namespace nopengl {
 
     };
 
+    // Related functions.
+
+    inline void bind(const GLenum target, const FrameBuffer &frameBuffer) noexcept {
+        glBindFramebuffer(target, *frameBuffer); GLC();
+    }
+
 } // namespace nopengl.

@@ -53,4 +53,10 @@ namespace nopengl {
 
     };
 
+    // Related functions.
+
+    inline void bind(const GLenum target, const Texture &texture) noexcept {
+        glBindTexture(target, *texture); GLC();
+    }
+
 } // namespace nopengl.

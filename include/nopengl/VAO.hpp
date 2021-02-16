@@ -57,6 +57,10 @@ namespace nopengl {
 
     // Related functions.
 
+    inline void bind(const VAO &vao) noexcept {
+        glBindVertexArray(*vao); GLC();
+    }
+
     void enable_vao_attribute_array(std::uint32_t index) noexcept {
         glEnableVertexAttribArray(index); GLC();
     }
