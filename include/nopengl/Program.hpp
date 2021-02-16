@@ -9,6 +9,7 @@
 
 #include "nopengl_config.hpp"
 #include "glc.hpp"
+#include "weak.hpp"
 
 namespace nopengl {
 
@@ -39,25 +40,25 @@ namespace nopengl {
         Program& operator=(const Program&) = delete;
 
         [[nodiscard]] GLuint operator*() const noexcept {
-            return inner & 0x0000FFFF;
+            return weaken(inner);
         }
 
         void emplace() noexcept {
             reset();
             inner = glCreateProgram(); GLC();
-            inner = (inner << 16) | inner;
+            inner = strengthen(inner);
         }
 
         void reset() noexcept {
             if (inner) {
-                glDeleteProgram(inner >> 16); GLC();
+                glDeleteProgram(clean(inner)); GLC();
             }
             inner = 0;
         }
 
         [[nodiscard]]
         Program weak_copy() const noexcept {
-            return Program(inner & 0x0000FFFF);
+            return Program(weaken(inner));
         }
 
         friend inline Program current_program_weak_copy() noexcept;
@@ -79,7 +80,7 @@ namespace nopengl {
         GLint program{};
         glGetIntegerv(GL_CURRENT_PROGRAM, &program); GLC();
         if (program == -1) {
-            NOPENGL_LOGGER("No current program for vao_attribute_pointer");
+            NOPENGL_LOGGER("No current program for current_program_weak_copy");
         }
         return Program(program);
     }
