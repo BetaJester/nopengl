@@ -6,7 +6,7 @@
 
 #include <string>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "Buffer.hpp"
 #include "nopengl.hpp"
 #include "logging.hpp"

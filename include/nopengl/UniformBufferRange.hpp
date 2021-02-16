@@ -8,7 +8,7 @@
 #include <string>
 #include <cstdint>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "nopengl.hpp"
 
 namespace nopengl {

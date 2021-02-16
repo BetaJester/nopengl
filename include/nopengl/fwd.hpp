@@ -7,7 +7,7 @@
 #include <string>
 #include <string_view>
 #include <cstdint>
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 
 namespace nopengl {
 
@@ -57,5 +57,9 @@ namespace nopengl {
     constexpr GLenum type_of() noexcept;
     [[nodiscard]]
     inline constexpr auto type_and_size(const GLenum attrtype) noexcept;
+
+    // Program.hpp
+    [[nodiscard]]
+    inline std::uint32_t current_program() noexcept;
 
 } // namespace nopengl.

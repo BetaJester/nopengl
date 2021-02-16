@@ -5,7 +5,8 @@
 #pragma once
 
 #include <type_traits>
-#include "nopen_config.hpp"
+#include <cstdint>
+#include "nopengl_config.hpp"
 
 namespace nopengl {
 

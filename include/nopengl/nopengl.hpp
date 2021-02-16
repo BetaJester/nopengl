@@ -8,7 +8,7 @@
 #include <string_view>
 #include <cstdint>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "Buffer.hpp"
 #include "FrameBuffer.hpp"
 #include "fwd.hpp"

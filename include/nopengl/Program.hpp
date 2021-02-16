@@ -5,8 +5,9 @@
 #pragma once
 
 #include <utility>
+#include <cstdint>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "glc.hpp"
 
 namespace nopengl {
@@ -52,5 +53,15 @@ namespace nopengl {
         }
 
     };
+
+    [[nodiscard]]
+    inline std::uint32_t current_program() noexcept {
+        GLint program{};
+        glGetIntegerv(GL_CURRENT_PROGRAM, &program); GLC();
+        if (program == -1) {
+            NOPENGL_LOGGER("No current program for vao_attribute_pointer");
+        }
+        return program;
+    }
 
 } // namespace nopengl.

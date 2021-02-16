@@ -46,7 +46,7 @@ target_sources(nopengl INTERFACE
 target_compile_features(nopengl INTERFACE cxx_std_20)
 target_compile_options(nopengl INTERFACE /W4 /WX /permissive-)
 configure_file("include/nopengl_config.hpp.in" "${PROJECT_BINARY_DIR}/nopengl/nopengl_config.hpp")
-target_include_directories(nopengl INTERFACE "include" "${PROJECT_BINARY_DIR}/nopen")
+target_include_directories(nopengl INTERFACE "include" "${PROJECT_BINARY_DIR}/nopengl")
 if (${NOPENGL_USE_INCLUDED_GLAD})
 	target_link_libraries(nopengl INTERFACE glad)
 endif()
