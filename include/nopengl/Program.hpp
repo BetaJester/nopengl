@@ -64,6 +64,8 @@ namespace nopengl {
 
     };
 
+    // Related functions.
+
     [[nodiscard]]
     inline Program current_program_weak_copy() noexcept {
         GLint program{};
