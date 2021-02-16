@@ -51,4 +51,11 @@ namespace nopengl {
     inline void bind(const GLenum target, const RenderBuffer &renderBuffer) noexcept;
     inline void viewport_scissor(const int x, const int y, const int width, const int height);
 
+    // gltypes.hpp
+    template<typename T>
+    [[nodiscard]]
+    constexpr GLenum type_of() noexcept;
+    [[nodiscard]]
+    inline constexpr auto type_and_size(const GLenum attrtype) noexcept;
+
 } // namespace nopengl.
