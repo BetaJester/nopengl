@@ -10,10 +10,7 @@ function(ngl_standalone name)
 	add_library(${app} "standalone.cpp")
 	target_compile_features(${app} PRIVATE cxx_std_20)
 	target_compile_definitions(${app} PRIVATE STANDALONE_HEADER=${name})
-	target_compile_options(${app} PRIVATE
-		$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX /wd4201 /permissive- /Zc:__cplusplus>
-		$<$<CXX_COMPILER_ID:Clang,GNU>:-Wall -Wextra -Werror -pedantic-errors -Wno-gnu-inline-cpp-without-extern>
-	)
+	pwropt_target_compile_options(${app} PRIVATE pwr_wall pwr_werror)
 	target_link_libraries(${app} PRIVATE nopengl)
 endfunction()
 
