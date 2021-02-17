@@ -29,7 +29,7 @@ int main() {
     glEnable(GL_CULL_FACE); GLC();
 
     SimpleProgram simple_program;
-    Cube cube(simple_program.shader_locations());
+    Cube cube(simple_program.program());
 
     const float aspect_ratio = static_cast<float>(config.window_width) / config.window_height;
     const float fov = 45.0f;

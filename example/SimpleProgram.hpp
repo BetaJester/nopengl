@@ -8,18 +8,7 @@
 
 class [[nodiscard]] SimpleProgram final {
 
-public:
-
-    struct [[nodiscard]] ShaderLocations final {
-        std::uint32_t a_position{};
-        std::uint32_t a_color{};
-        std::uint32_t u_model_matrix{};
-    };
-
-private:
-
     nopengl::Program prog{ nullptr };
-    ShaderLocations locations;
 
     static constexpr std::string_view vertex_source{
 R"glsl(
@@ -59,14 +48,7 @@ public:
 
     SimpleProgram() noexcept {
         prog = nopengl::build_program(vertex_source, fragment_source);
-
-        locations.a_position = nopengl::attribute_location(prog, "a_position");
-        locations.a_color = nopengl::attribute_location(prog, "a_color");
-        locations.u_model_matrix = nopengl::uniform_location(prog, "u_model_matrix");
     }
-
-    [[nodiscard]]
-    const ShaderLocations& shader_locations() const noexcept { return locations; }
 
     [[nodiscard]]
     const nopengl::Program &program() const noexcept {

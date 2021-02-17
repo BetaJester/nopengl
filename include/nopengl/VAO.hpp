@@ -4,10 +4,13 @@
 
 #pragma once
 
+#include <string_view>
 #include <utility>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "glc.hpp"
+#include "gltypes.hpp"
+#include "fwd.hpp"
 
 namespace nopengl {
 
@@ -51,5 +54,36 @@ namespace nopengl {
         }
 
     };
+
+    // Related functions.
+
+    inline void bind(const VAO &vao) noexcept {
+        glBindVertexArray(*vao); GLC();
+    }
+
+    void enable_vao_attribute_array(std::uint32_t index) noexcept {
+        glEnableVertexAttribArray(index); GLC();
+    }
+
+    inline void vao_attribute_pointer(const std::uint32_t index, const std::uint32_t size, const GLenum type, const bool normalized, const std::size_t stride, const std::size_t offset) noexcept {
+        glVertexAttribPointer(index, size, type, normalized, (GLsizei)stride, (void *)offset); GLC();
+    }
+
+    inline void vao_attribute_pointer(const Program &program, const std::string_view name, const std::size_t stride, const std::size_t offset) noexcept {
+        const auto index = attribute_location(program, name);
+        GLint asize{};
+        GLenum atype{};
+        glGetActiveAttrib(*program, index, 0, nullptr, &asize, &atype, nullptr); GLC();
+        auto [type, size] = type_and_size(atype);
+        vao_attribute_pointer(index, size, type, false, stride, offset);
+        enable_vao_attribute_array(index);
+    }
+
+    inline void vao_attribute_pointer(const std::string_view name, const std::size_t stride, const std::size_t offset) noexcept {
+        const auto program = current_program_weak_copy();
+        vao_attribute_pointer(program, name, stride, offset);
+    }
+
+
 
 } // namesapce nopengl.

@@ -17,8 +17,5 @@ FetchContent_MakeAvailable(glfw glm)
 
 add_executable(ngl_example "example.cpp" "Context.hpp" "Cube.hpp" "ManInUniform.hpp" "Timer.hpp" "SimpleProgram.hpp")
 target_compile_features(ngl_example PRIVATE cxx_std_20)
-target_compile_options(ngl_example PRIVATE
-	$<$<CXX_COMPILER_ID:MSVC>:/W4 /WX /wd4201 /permissive- /Zc:__cplusplus>
-	$<$<CXX_COMPILER_ID:Clang,GNU>:-Wall -Wextra -Werror -pedantic-errors -Wno-gnu-inline-cpp-without-extern>
-)
+pwropt_target_compile_options(ngl_example PRIVATE pwr_wall pwr_werror)
 target_link_libraries(ngl_example PRIVATE nopengl glfw glm)

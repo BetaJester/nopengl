@@ -6,7 +6,7 @@
 
 #include <utility>
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "glc.hpp"
 
 namespace nopengl {
@@ -52,5 +52,11 @@ namespace nopengl {
         }
 
     };
+
+    // Related functions.
+
+    inline void bind(const GLenum target, const Texture &texture) noexcept {
+        glBindTexture(target, *texture); GLC();
+    }
 
 } // namespace nopengl.

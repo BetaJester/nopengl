@@ -4,7 +4,7 @@
 
 #pragma once
 
-#include "nopen_config.hpp"
+#include "nopengl_config.hpp"
 #include "logging.hpp"
 
 namespace nopengl {
