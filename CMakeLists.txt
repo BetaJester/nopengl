@@ -41,6 +41,14 @@ if (${NOPENGL_ENABLE_TESTS})
 	endif()
 endif()
 
+FetchContent_Declare(
+	pwropt
+	GIT_REPOSITORY https://github.com/BetaJester/pwropt.git
+	GIT_TAG main
+)
+FetchContent_MakeAvailable(pwropt)
+add_subdirectory(${pwropt_SOURCE_DIR})
+
 add_library(nopengl INTERFACE)
 target_sources(nopengl INTERFACE
 	"include/nopengl/AutoAlpha.hpp"
@@ -58,7 +66,7 @@ target_sources(nopengl INTERFACE
 	"include/nopengl/weak.hpp"
 	)
 target_compile_features(nopengl INTERFACE cxx_std_20)
-target_compile_options(nopengl INTERFACE /W4 /WX /permissive-)
+pwropt_target_compile_options(nopengl INTERFACE pwr_wall pwr_werror)
 configure_file("include/nopengl_config.hpp.in" "${PROJECT_BINARY_DIR}/nopengl/nopengl_config.hpp")
 target_include_directories(nopengl INTERFACE "include" "${PROJECT_BINARY_DIR}/nopengl")
 if (${NOPENGL_USE_INCLUDED_GLAD})
