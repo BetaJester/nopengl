@@ -11,6 +11,7 @@
 #include "glc.hpp"
 #include "gltypes.hpp"
 #include "fwd.hpp"
+#include "Program.hpp"
 
 namespace nopengl {
 
@@ -61,7 +62,7 @@ namespace nopengl {
         glBindVertexArray(*vao); GLC();
     }
 
-    void enable_vao_attribute_array(std::uint32_t index) noexcept {
+    inline void enable_vao_attribute_array(std::uint32_t index) noexcept {
         glEnableVertexAttribArray(index); GLC();
     }
 

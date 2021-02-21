@@ -8,4 +8,5 @@
 
 #if NOPENGL_USE_INCLUDED_GLAD()
 #include <glad/glad.h>
+#undef APIENTRY
 #endif

@@ -47,7 +47,7 @@ FetchContent_Declare(
 	GIT_TAG main
 )
 FetchContent_MakeAvailable(pwropt)
-add_subdirectory(${pwropt_SOURCE_DIR})
+add_subdirectory(${pwropt_SOURCE_DIR} "ext/pwropt")
 
 add_library(nopengl INTERFACE)
 target_sources(nopengl INTERFACE
