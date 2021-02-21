@@ -19,23 +19,23 @@ namespace nopengl::logging {
     void stdout_logger(std::string_view str);
     static inline logging_f logger_function = stdout_logger;
 
-    void quicklog(std::string_view str) {
+    inline void quicklog(std::string_view str) {
         if (logger_function) {
             logger_function(str);
         }
     }
 
     template<typename Str, typename ...Args>
-    void logger(const Str &str, Args &&...args) {
+    inline void logger(const Str &str, Args &&...args) {
         quicklog(fmt::format(str, std::forward<Args>(args)...));
         quicklog("\n");
     }
 
-    void stdout_logger(std::string_view str) {
+    inline void stdout_logger(std::string_view str) {
         std::fputs(str.data(), stdout);
     }
 
-    void set_logger(logging_f f) {
+    inline void set_logger(logging_f f) {
         logger_function = f;
     }
     
